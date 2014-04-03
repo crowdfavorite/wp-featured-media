@@ -1,0 +1,17 @@
+# WP Featured Media
+
+## Description
+
+This library will make it easier to include videos in the featured image spot. If no video is specified, it will fall back to the featured image.
+
+## Usage
+- Include the file in your functions.php. This library also relies on the [CF Post Meta Plugin](https://github.com/crowdfavorite/wp-cf-post-meta) to display input for video URLs, this will need to be included as well.
+
+- Call `cffm_featured_media` wherever you want to output the featured media
+
+
+## Filters
+- `cffm_video_width` : The width of the video iframe. Defaults to $content_width or 990
+- `cffm_video_height` : The height of the video iframe. Defaults to null
+- `cffm_video_markup` : The markup for the video iframe
+- `cffm_image_markup` : The markup for the single featured image view

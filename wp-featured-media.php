@@ -4,8 +4,8 @@
 if (class_exists('cf_meta')) {
 function cffm_meta_config() {
 	$config[] = array(
-		'title' => __('Featured Video', 'cf-featured-video'),
-		'description' => __('Paste the source URL of the video you would like to be featured', 'cf-featured-video'),
+		'title' => __('Featured Video', 'cffm'),
+		'description' => __('Paste the source URL of the video you would like to be featured', 'cffm'),
 		'type' => array('post'),
 		'id' => 'featured-video',
 		'add_to_srotables' => true,
@@ -20,7 +20,7 @@ function cffm_meta_config() {
 		),
 	);
 }
-add_action('cf_meta_config', 'cffm_meta_config');
+add_action('cf_meta_config', 'cffm_meta_config', 11);
 }
 else {
 	// @TODO build out meta box and save process manually
@@ -31,7 +31,7 @@ function cffm_featured_media($post_id) {
 	$video_url = trim(get_post_meta($post_id, '_cf_featured_video_url', true));
 
 
-	if (!empty($video_url) && is_single()) {
+	if (!empty(trim($video_url)) && is_single()) {
 		$vid_width = empty($content_width) ? '990' : $content_width;
 		$vid_width = apply_filters('cffm_video_width', $content_width, $post_id);
 		$vid_height = apply_filters('cffm_video_height', null $post_id);
@@ -49,7 +49,7 @@ function cffm_featured_media($post_id) {
 				$attr_string .= $key.'="'.$value.'" ';
 		}
 		//@TODO look into oembed support, this was built for a player which does not suppose oembed
-		return apply_filters('cffm_video_markup', '<iframe '.$attr_string.' allowfullscreen>'.__('Your browser does not support iframes.', 'cffm').'</iframe>';
+		return apply_filters('cffm_video_markup', '<iframe '.$attr_string.' allowfullscreen>'.__('Your browser does not support iframes.', 'cffm').'</iframe>', $post_id, $attrs);
 	}
 	// @TODO Add gallery support
 	else if (has_post_thumbnail($post_id)) {
@@ -68,4 +68,3 @@ function cffm_featured_media($post_id) {
 
 	return false;
 }
-
