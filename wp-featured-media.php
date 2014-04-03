@@ -32,10 +32,10 @@ function cffm_featured_media($post_id) {
 	$video_url = trim(get_post_meta($post_id, '_cf_featured_video_url', true));
 
 
-	if (!empty(trim($video_url)) && is_single()) {
+	if (!empty($video_url) && is_single()) {
 		$vid_width = empty($content_width) ? '990' : $content_width;
 		$vid_width = apply_filters('cffm_video_width', $content_width, $post_id);
-		$vid_height = apply_filters('cffm_video_height', null $post_id);
+		$vid_height = apply_filters('cffm_video_height', null, $post_id);
 
 		$attrs = array(
 			'src' => esc_url($video_url),
@@ -48,11 +48,11 @@ function cffm_featured_media($post_id) {
 		foreach ($attrs as $key => $value) {
 			if (!is_null($value)) {
 				$attr_string .= $key.'="'.$value.'" ';
+			}
 		}
 		//@TODO look into oembed support, this was built for a player which does not suppose oembed
 		return apply_filters('cffm_video_markup', '<iframe '.$attr_string.' allowfullscreen>'.__('Your browser does not support iframes.', 'cffm').'</iframe>', $post_id, $attrs);
 	}
-	// @TODO Add gallery support
 	else if (has_post_thumbnail($post_id)) {
 		$post_thumbnail_id = get_post_thumbnail_id( $post_id );
 		$thumbnail_url = wp_get_attachment_url($post_thumbnail_id);
@@ -63,7 +63,7 @@ function cffm_featured_media($post_id) {
 		return apply_filters('cffm_image_markup', '
 		<figure class="single-featured-image">
 			'.$img.'
-		</figure>', $post_id, $img, $post_thumbnail_id, $thumnail_url);
+		</figure>', $post_id, $img, $post_thumbnail_id, $thumbnail_url);
 
 	}
 
