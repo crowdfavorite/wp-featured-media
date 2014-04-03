@@ -1,5 +1,6 @@
 <?php
 
+load_textdomain('cffm');
 
 if (class_exists('cf_meta')) {
 function cffm_meta_config() {
