@@ -15,3 +15,4 @@ This library will make it easier to include videos in the featured image spot. I
 - `cffm_video_height` : The height of the video iframe. Defaults to null
 - `cffm_video_markup` : The markup for the video iframe
 - `cffm_image_markup` : The markup for the single featured image view
+- `cffm_post_types` : Post types to setup the featured media to appear on in the admin
